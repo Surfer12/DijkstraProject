@@ -1,5 +1,3 @@
-# DijkstraProject/DijkstraProject/README.md
-
 # Dijkstra Algorithm Project
 
 This project implements Dijkstra's algorithm to find the shortest path in a weighted graph. It consists of three main classes:
