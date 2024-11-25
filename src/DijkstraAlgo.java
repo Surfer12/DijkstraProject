@@ -1,4 +1,8 @@
+import java.util.Arrays;
+import java.util.PriorityQueue;
+
 import generic.graphs.Graph;
+import generic.graphs.WeightedGraph;
 
 public class DijkstraAlgo {
 
