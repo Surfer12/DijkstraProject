@@ -1,6 +1,8 @@
+import generic.graphs.Graph;
+
 public class DijkstraAlgo {
 
-    public static int[] dijkstra(WeightedGraph graph, int startVertex) {
+    public static <T> int[] dijkstra(Graph<T> graph, int startVertex) {
         int vertices = graph.getVertices();
         int[] distances = new int[vertices];
         boolean[] visited = new boolean[vertices];
