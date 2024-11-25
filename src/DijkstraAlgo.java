@@ -1,10 +1,12 @@
+package legacyalgo;
+
+import generic.graphs.Graph;
+import generic.graphs.WeightedGraph;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.PriorityQueue;
-
-import generic.graphs.Graph;
-import generic.graphs.WeightedGraph;
 
 public class DijkstraAlgo {
 
@@ -26,7 +28,7 @@ public class DijkstraAlgo {
             if (visited[currentVertex]) continue;
             visited[currentVertex] = true;
 
-            List<WeightedGraph.Node> neighbors = graph.getNeighbors(currentVertex); 
+            List<WeightedGraph.Node> neighbors = graph.getNeighbors(currentVertex);
             for (WeightedGraph.Node neighbor : neighbors) {
                 int newDist = distances[currentVertex] + neighbor.weight;
 
@@ -45,7 +47,7 @@ public class DijkstraAlgo {
     private static void printPath(int start, int end, int[] previous, int[] distances) {
         List<Integer> path = new ArrayList<>();
         int current = end;
-        
+
         while (current != -1) {
             path.add(0, current);
             current = previous[current];

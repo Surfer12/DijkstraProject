@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class WeightedGraph {
     private final int vertices;
     private final List<List<Node>> adjList;
