@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.PriorityQueue;
 
 import generic.graphs.Graph;
@@ -24,7 +26,7 @@ public class DijkstraAlgo {
             if (visited[currentVertex]) continue;
             visited[currentVertex] = true;
 
-            List<WeightedGraph.Node> neighbors = graph.getAdjList().get(currentVertex);
+            List<WeightedGraph.Node> neighbors = graph.getNeighbors(currentVertex); 
             for (WeightedGraph.Node neighbor : neighbors) {
                 int newDist = distances[currentVertex] + neighbor.weight;
 
