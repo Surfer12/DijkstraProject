@@ -1,13 +1,6 @@
 package legacyalgo.generic;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Queue;
-import java.util.Set;
+
+import java.util.*;
 
 /**
  * A class that implements Breadth-First Search (BFS) algorithm for graph traversal.
@@ -46,13 +39,13 @@ public class BFS<T> {
         Map<Integer, List<Integer>> graph = new HashMap<>();
         graph.put(0, Arrays.asList(1, 4, 6));
         graph.put(1, Arrays.asList(0, 2, 7));
-        graph.put(2, Arrays.asList(1));
+        graph.put(2, List.of(1));
         graph.put(3, Arrays.asList(4, 5));
         graph.put(4, Arrays.asList(0, 3, 8));
-        graph.put(5, Arrays.asList(3));
+        graph.put(5, List.of(3));
         graph.put(6, Arrays.asList(0, 7));
         graph.put(7, Arrays.asList(1, 6));
-        graph.put(8, Arrays.asList(4));
+        graph.put(8, List.of(4));
 
         int startNode = 0; // Starting node for BFS traversal
         List<Integer> bfsTraversal = bfs(graph, startNode); // Perform BFS

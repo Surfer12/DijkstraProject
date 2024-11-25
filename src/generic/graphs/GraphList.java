@@ -1,14 +1,31 @@
 package legacyalgo.generic.graphs;
 
 import legacyalgo.generic.Graph;
-import java.util.*;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 
 public class GraphList<T> implements Graph<T> {
-    private Map<T, Set<T>> adjacencyList;
+    private final Map<T, Set<T>> adjacencyList;
 
     public GraphList() {
         adjacencyList = new HashMap<>();
+    }
+
+    public static void main(String[] args) {
+        GraphList<Integer> graph = new GraphList<>();
+        graph.addEdge(0, 1);
+        graph.addEdge(0, 4);
+        graph.addEdge(1, 2);
+        graph.addEdge(1, 3);
+        graph.addEdge(1, 4);
+        graph.addEdge(2, 3);
+        graph.addEdge(3, 4);
+
+        graph.printGraph();
     }
 
     @Override
@@ -37,7 +54,7 @@ public class GraphList<T> implements Graph<T> {
     public void removeVertex(T vertex) {
         adjacencyList.remove(vertex);
         for (T neighbor : adjacencyList.keySet()) {
-            adjacencyList.get(neighbor).remove(vertex);   
+            adjacencyList.get(neighbor).remove(vertex);
             if (adjacencyList.get(neighbor).isEmpty()) {
                 adjacencyList.remove(neighbor);
             }
@@ -45,12 +62,12 @@ public class GraphList<T> implements Graph<T> {
     }
 
     @Override
-    public void removeEdge(T source, T destination) {        
+    public void removeEdge(T source, T destination) {
         adjacencyList.get(source).remove(destination);
-        adjacencyList.get(destination).remove(source);     
+        adjacencyList.get(destination).remove(source);
         // Removed the following lines to prevent unintended vertex removal
         // if (adjacencyList.get(source).isEmpty()) {
-        //     adjacencyList.remove(source);   
+        //     adjacencyList.remove(source);
         //     if (adjacencyList.get(destination).isEmpty()) {
         //         adjacencyList.remove(destination);
         //     }
@@ -73,18 +90,5 @@ public class GraphList<T> implements Graph<T> {
             System.out.print(entry.getKey() + " -> ");
             System.out.println(entry.getValue());
         }
-    }
-
-    public static void main(String[] args) {
-        GraphList<Integer> graph = new GraphList<>();
-        graph.addEdge(0, 1);
-        graph.addEdge(0, 4);
-        graph.addEdge(1, 2);
-        graph.addEdge(1, 3);
-        graph.addEdge(1, 4);
-        graph.addEdge(2, 3);
-        graph.addEdge(3, 4);
-
-        graph.printGraph();
     }
 }

@@ -1,10 +1,12 @@
 package legacyalgo.generic.dfs;
-import java.util.*;
+
 import legacyalgo.generic.Graph;
 
+import java.util.*;
+
 public class GenericDFS<T> implements Graph<T> {
-    private Map<T, Set<T>> adjacencyList = new HashMap<>();
-    
+    private final Map<T, Set<T>> adjacencyList = new HashMap<>();
+
     @Override
     public void dfs(T node, Set<T> visited, Graph<T> graph) {
         if (node == null) return;
@@ -43,7 +45,7 @@ public class GenericDFS<T> implements Graph<T> {
     public void removeVertex(T vertex) {
         adjacencyList.remove(vertex);
         for (T neighbor : adjacencyList.keySet()) {
-            adjacencyList.get(neighbor).remove(vertex);   
+            adjacencyList.get(neighbor).remove(vertex);
             if (adjacencyList.get(neighbor).isEmpty()) {
                 adjacencyList.remove(neighbor);
             }
@@ -51,9 +53,9 @@ public class GenericDFS<T> implements Graph<T> {
     }
 
     @Override
-    public void removeEdge(T source, T destination) {        
+    public void removeEdge(T source, T destination) {
         adjacencyList.get(source).remove(destination);
-        adjacencyList.get(destination).remove(source);     
+        adjacencyList.get(destination).remove(source);
     }
 
     @Override
@@ -72,8 +74,7 @@ public class GenericDFS<T> implements Graph<T> {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof GenericDFS)) return false;
-        GenericDFS<?> that = (GenericDFS<?>) o;
+        if (!(o instanceof GenericDFS<?> that)) return false;
         return Objects.equals(adjacencyList, that.adjacencyList);
     }
 

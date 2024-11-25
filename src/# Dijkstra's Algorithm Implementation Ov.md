@@ -102,9 +102,9 @@ The `DijkstraGenericCopy.java` file demonstrates a generic implementation of Dij
 with any data type for vertices.
 
 ```java
-public class DijkstraGenericCopy{
+public class DijkstraGenericCopy {
     public static <T> Map<GenericNode<T>, Integer> dijkstra(
-            Map<GenericNode<T>, Map<GenericNode<T>, Integer>> graph, 
+            Map<GenericNode<T>, Map<GenericNode<T>, Integer>> graph,
             GenericNode<T> source) {
         // ...existing code...
     }
@@ -121,11 +121,11 @@ Implementing a method to reconstruct the shortest path from the source to any de
 the algorithm by providing not just the distances but the actual paths taken.
 
 ```java
-public class DijkstraGenericCopy{
+public class DijkstraGenericCopy {
     // ...existing code...
 
     public static <T> Map<GenericNode<T>, Integer> dijkstra(
-            Map<GenericNode<T>, Map<GenericNode<T>, Integer>> graph, 
+            Map<GenericNode<T>, Map<GenericNode<T>, Integer>> graph,
             GenericNode<T> source, GenericNode<T> destination) {
         // ...existing code...
     }
@@ -137,7 +137,7 @@ public class DijkstraGenericCopy{
         // ...existing code...
         // Path reconstruction logic
     }
-    
+
     // ...existing code...
 }
 ```
@@ -167,32 +167,32 @@ Implemented path reconstruction to retrieve the actual shortest path from the so
 ```java
 
 
-public class DijkstraGenericCopy{
+public class DijkstraGenericCopy {
     public static <T> Map<GenericNode<T>, Integer> dijkstra(
-            Map<GenericNode<T>, Map<GenericNode<T>, Integer>> graph, 
+            Map<GenericNode<T>, Map<GenericNode<T>, Integer>> graph,
             GenericNode<T> source, GenericNode<T> destination) {
         Map<GenericNode<T>, Integer> distances = new HashMap<>();
         Map<GenericNode<T>, GenericNode<T>> previous = new HashMap<>(); // Track previous nodes
         PriorityQueue<GenericNode<T>> queue = new PriorityQueue<>(
-            (a, b) -> distances.getOrDefault(a, Integer.MAX_VALUE)
-                    - distances.getOrDefault(b, Integer.MAX_VALUE));
-        
+                (a, b) -> distances.getOrDefault(a, Integer.MAX_VALUE)
+                        - distances.getOrDefault(b, Integer.MAX_VALUE));
+
         // Initialize distances
         for (GenericNode<T> node : graph.keySet()) {
             distances.put(node, Integer.MAX_VALUE);
         }
         distances.put(source, 0);
         queue.add(source);
-        
+
         while (!queue.isEmpty()) {
             GenericNode<T> current = queue.poll();
-            
+
             if (current.equals(destination)) break; // Stop if destination is reached
-            
+
             for (Map.Entry<GenericNode<T>, Integer> neighbor : graph.get(current).entrySet()) {
                 GenericNode<T> next = neighbor.getKey();
                 int newDist = distances.get(current) + neighbor.getValue();
-                
+
                 if (newDist < distances.get(next)) {
                     distances.put(next, newDist);
                     previous.put(next, current); // Update previous node
@@ -200,7 +200,7 @@ public class DijkstraGenericCopy{
                 }
             }
         }
-        
+
         reconstructPath(previous, destination); // Reconstruct and print path
         return distances;
     }
@@ -208,19 +208,19 @@ public class DijkstraGenericCopy{
     private static <T> void reconstructPath(Map<GenericNode<T>, GenericNode<T>> previous, GenericNode<T> destination) {
         List<GenericNode<T>> path = new ArrayList<>();
         GenericNode<T> current = destination;
-        
+
         while (current != null) {
             path.add(0, current);
             current = previous.get(current);
         }
-        
+
         System.out.print("Path: ");
         for (GenericNode<T> node : path) {
             System.out.print(node.getData() + " ");
         }
         System.out.println();
     }
-    
+
     public static void printShortestDistances(Map<GenericNode<?>, Integer> distances) {
         // ...existing code...
     }
@@ -270,12 +270,12 @@ Ensured compatibility with `GenericNode` by modifying the `addEdge` method to ha
 
 public class WeightedGraph {
     // ...existing code...
-    
+
     public void addEdge(GenericNode<Integer> source, GenericNode<Integer> destination, int weight) {
         adjList.get(source.getData()).add(new Node(destination.getData(), weight));
         adjList.get(destination.getData()).add(new Node(source.getData(), weight)); // For undirected graph
     }
-    
+
     // ...existing code...
 }
 ```

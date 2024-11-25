@@ -1,4 +1,5 @@
 package legacyalgo.generic;
+
 import java.util.function.Consumer;
 
 public class InOrderTraversal<T> {

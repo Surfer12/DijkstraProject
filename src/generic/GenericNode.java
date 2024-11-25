@@ -51,13 +51,12 @@ public class GenericNode<T> {
 
     public void setRight(GenericNode<T> right) {
         this.right = right;
-    }   
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof GenericNode)) return false;
-        GenericNode<?> that = (GenericNode<?>) o;
+        if (!(o instanceof GenericNode<?> that)) return false;
         return Objects.equals(data, that.data);
     }
 

@@ -1,8 +1,9 @@
 package legacyalgo.generic;
+
 import java.util.*;
 
 public class GenericTraversal<T> {
-   
+
     // Method to perform Breadth-First Search (BFS) traversal using the Node class
     public List<T> bfs(GenericNode<T> startNode) {
         List<T> visitedNodes = new ArrayList<>();

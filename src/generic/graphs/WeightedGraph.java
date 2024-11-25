@@ -1,8 +1,9 @@
 package legacyalgo.generic.graphs;
+
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.Collections;
 
 // The graph shows:
 
@@ -20,11 +21,29 @@ import java.util.Collections;
 
 public class WeightedGraph implements Graph<Integer> {
     // Use a HashMap to store the graph structure
-    private Map<Integer, Map<Integer, Integer>> graph;
+    private final Map<Integer, Map<Integer, Integer>> graph;
 
     // Constructor to initialize the graph
     public WeightedGraph() {
         this.graph = new HashMap<>();
+    }
+
+    public static void main(String[] args) {
+        Map<Integer, Map<Integer, Integer>> graph = new HashMap<>();
+
+        // Add edges as per the given graph
+        graph.put(1, new HashMap<>(Map.of(2, 4, 3, 2))); // Node 1 connected to 2 (weight 4) and 3 (weight 2)
+        graph.put(2, new HashMap<>(Map.of(4, 5, 5, 1))); // Node 2 connected to 4 (weight 5) and 5 (weight 1)
+        graph.put(3, new HashMap<>(Map.of(6, 3))); // Node 3 connected to 6 (weight 3)
+        graph.put(4, new HashMap<>()); // Node 4 has no outgoing edges
+        graph.put(5, new HashMap<>()); // Node 5 has no outgoing edges
+        graph.put(6, new HashMap<>()); // Node 6 has no outgoing edges
+
+        // Print the graph
+        System.out.println("Graph representation (Adjacency Map):");
+        for (var entry : graph.entrySet()) {
+            System.out.println("Node " + entry.getKey() + " connected to: " + entry.getValue());
+        }
     }
 
     @Override
@@ -47,7 +66,7 @@ public class WeightedGraph implements Graph<Integer> {
         addVertex(source);
         // Ensure destination vertex exists
         addVertex(destination);
-        
+
         // Add the edge with its weight
         graph.get(source).put(destination, weight);
     }
@@ -57,7 +76,7 @@ public class WeightedGraph implements Graph<Integer> {
         // Remove the vertex and all edges pointing to it
         if (graph.containsKey(vertex)) {
             graph.remove(vertex);
-            
+
             // Remove edges pointing to this vertex from other vertices
             for (Map<Integer, Integer> edges : graph.values()) {
                 edges.remove(vertex);
@@ -74,7 +93,7 @@ public class WeightedGraph implements Graph<Integer> {
     }
 
     @Override
-    public Set<Integer> getNeighbors(Integer vertex) {
+    public Set<Integer> getNeighbors(int vertex) {
         // Return the set of neighboring vertices
         if (graph.containsKey(vertex)) {
             return graph.get(vertex).keySet();
@@ -100,24 +119,6 @@ public class WeightedGraph implements Graph<Integer> {
     public Object getAdjList() {
         // Return the entire graph structure
         return graph;
-    }
-
-    public static void main(String[] args) {
-        Map<Integer, Map<Integer, Integer>> graph = new HashMap<>();
-                
-        // Add edges as per the given graph
-        graph.put(1, new HashMap<>(Map.of(2, 4, 3, 2))); // Node 1 connected to 2 (weight 4) and 3 (weight 2)
-        graph.put(2, new HashMap<>(Map.of(4, 5, 5, 1))); // Node 2 connected to 4 (weight 5) and 5 (weight 1)
-        graph.put(3, new HashMap<>(Map.of(6, 3))); // Node 3 connected to 6 (weight 3)
-        graph.put(4, new HashMap<>()); // Node 4 has no outgoing edges
-        graph.put(5, new HashMap<>()); // Node 5 has no outgoing edges
-        graph.put(6, new HashMap<>()); // Node 6 has no outgoing edges
-        
-        // Print the graph
-        System.out.println("Graph representation (Adjacency Map):");
-        for (var entry : graph.entrySet()) {
-            System.out.println("Node " + entry.getKey() + " connected to: " + entry.getValue());
-        }
     }
 
     public static class Node {

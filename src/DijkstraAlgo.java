@@ -1,7 +1,8 @@
 package legacyalgo;
 
-import generic.graphs.Graph;
-import generic.graphs.WeightedGraph;
+import legacyalgo.generic.graphs.Graph;
+import legacyalgo.generic.graphs.WeightedGraph;
+import legacyalgo.WeightedGraph.Node;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,7 +29,7 @@ public class DijkstraAlgo {
             if (visited[currentVertex]) continue;
             visited[currentVertex] = true;
 
-            List<WeightedGraph.Node> neighbors = graph.getNeighbors(currentVertex);
+            List<WeightedGraph.Node> neighbors = (List<WeightedGraph.Node>) graph.getNeighbors(currentVertex);
             for (WeightedGraph.Node neighbor : neighbors) {
                 int newDist = distances[currentVertex] + neighbor.weight;
 

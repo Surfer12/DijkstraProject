@@ -1,7 +1,10 @@
+package legacyalgo;
+
+import legacyalgo.generic.graphs.Graph;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WeightedGraph {
+public class WeightedGraph implements Graph<Integer> {
     private final int vertices;
     private final List<List<Node>> adjList;
 
