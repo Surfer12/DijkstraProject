@@ -21,6 +21,13 @@ public class WeightedGraph implements Graph<Integer> {
         adjList.get(destination).add(new Node(source, weight)); // For undirected graph
     }
 
+    @Override
+    public void addVertex(Integer vertex) {
+        while (adjList.size() <= vertex) {
+            adjList.add(new ArrayList<>());
+        }
+    }
+
     public int getVertices() {
         return vertices;
     }
