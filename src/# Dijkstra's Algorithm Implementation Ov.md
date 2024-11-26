@@ -142,13 +142,6 @@ public class DijkstraGenericCopy {
 }
 ```
 
-### Potential Enhancements
-
-- **Integration with DijkstraGeneric.java:** Migrating the generic implementation from `DijkstraGenericCopy.java` to
-  `DijkstraGeneric.java` for consistency.
-- **Enhanced Path Reconstruction:** Refining the `reconstructPath` method to handle multiple destinations and provide
-  more detailed path information.
-
 ## Conclusion
 
 The incorporation of generics into the Dijkstra's algorithm implementation significantly broadens its applicability,
