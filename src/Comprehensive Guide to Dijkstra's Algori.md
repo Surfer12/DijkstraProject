@@ -2,6 +2,7 @@ Comprehensive Guide to Dijkstra's Algorithm Implementation
 1. Algorithm Overview
 Dijkstra's algorithm finds the shortest paths between nodes in a weighted graph, which may represent networks, roads, or any weighted relationships.
 Core Components
+```mermaid
 graph TD
 
     subgraph Components
@@ -15,8 +16,10 @@ graph TD
         PT --> |Enables| PR[Path Reconstruction]
 
     end
+```
 2. Implementation Structure
 Base Graph Structure
+```java
 public class WeightedGraph<T> {
 
     private Map<T, Map<T, Integer>> adjacencyList;
@@ -32,11 +35,15 @@ public class WeightedGraph<T> {
     }
 
 }
+```
 Priority Queue Management
+```java
 PriorityQueue<Node> pq = new PriorityQueue<>((a, b) -> 
 
     distances.get(a) - distances.get(b));
+```
 3. Algorithm Execution Process
+```mermaid
 sequenceDiagram
 
     participant Init as Initialization
@@ -66,12 +73,14 @@ sequenceDiagram
         Process->>PQ: Add updated nodes
 
     end
+```
 
-    
-
-    Path->>Path: Reconstruct shortest path
+```
+Path->>Path: Reconstruct shortest path
+```
 4. Example Walkthrough
 Sample Graph
+```mermaid
 graph TD
 
     0((0)) -->|7| 1((1))
@@ -95,15 +104,16 @@ graph TD
     style 0 fill:#f9f,stroke:#333,stroke-width:4px
 
     style 1,2,3,4,5 fill:#bbf,stroke:#333,stroke-width:2px
+``` 
 Processing Steps
 1.	Initialize distances:
 
 Node 0: 0
 
 All other nodes: ∞
-
+```
 2.	Priority Queue States:
-
+```mermaid
 sequenceDiagram
 
     participant PQ as Priority Queue
@@ -123,7 +133,9 @@ sequenceDiagram
     PQ->>D: Process 1
 
     Note over PQ: Next: [(2,9),(5,11),(3,22)]
+```
 5. Path Reconstruction
+```mermaid
 graph TD
 
     subgraph Path Tracking Structure
@@ -137,7 +149,9 @@ graph TD
         N2 -->|"prev[5]=2"| N5[Node 5]
 
     end
+```
 Implementation:
+```java
 private List<Node> reconstructPath(Node destination) {
 
     List<Node> path = new ArrayList<>();
@@ -157,7 +171,9 @@ private List<Node> reconstructPath(Node destination) {
     return path;
 
 }
+```
 6. Edge Relaxation Process
+```mermaid
 graph LR
 
     subgraph Edge Relaxation
@@ -169,9 +185,8 @@ graph LR
         style N fill:#bbf
 
     end
-
-    
-
+```
+```mermaid
     subgraph Decision
 
         direction TB
@@ -183,6 +198,8 @@ graph LR
         P[Update previous node]
 
     end
+```
+
 7. Performance Characteristics
 Time Complexity
 -	With Binary Heap: O((V + E) log V)
@@ -195,7 +212,7 @@ Space Complexity
 1.	Priority Queue Optimization
 
 // Use offers instead of updates
-
+```java
 if (newDistance < distances.get(neighbor)) {
 
     pq.offer(new Node(neighbor, newDistance));
@@ -203,25 +220,26 @@ if (newDistance < distances.get(neighbor)) {
     distances.put(neighbor, newDistance);
 
 }
-
+```
 2.	Memory Management
 
 // Use primitive arrays for small graphs
-
+```java
 int[] distances = new int[vertices];
 
 int[] previous = new int[vertices];
-
+```
 3.	Early Termination
-
+```java
 if (current.equals(destination)) {
 
     break; // Found shortest path to destination
 
 }
+```
 9. Best Practices
 1.	Input Validation
-
+```java
 public void validateInput(Graph graph) {
 
     if (graph == null || graph.isEmpty()) {
@@ -231,17 +249,17 @@ public void validateInput(Graph graph) {
     }
 
 }
-
+```
 2.	Edge Case Handling
-
+```java
 if (source.equals(destination)) {
 
     return Collections.singletonList(source);
 
 }
-
+```
 3.	Negative Weight Detection
-
+```java
 for (Edge edge : graph.getEdges()) {
 
     if (edge.weight < 0) {
@@ -251,6 +269,7 @@ for (Edge edge : graph.getEdges()) {
     }
 
 }
+```
 10. Common Applications
 1.	Network Routing
 2.	Social Networks
@@ -258,6 +277,7 @@ for (Edge edge : graph.getEdges()) {
 4.	Game AI Pathfinding
 5.	Resource Distribution
 11. Testing Strategies
+```java
 @Test
 
 public void testShortestPath() {
@@ -273,12 +293,11 @@ public void testShortestPath() {
     assertEquals(expectedDistance, getPathDistance(path));
 
 }
-
-Would you like me to expand on any particular section or add more specific implementation details?
-
+```
 
 
 1. Priority Queue Maintenance
+```mermaid
 sequenceDiagram
 
     participant PQ as Priority Queue
@@ -309,9 +328,10 @@ sequenceDiagram
 
     DS->>PQ: Add/Update neighbors:<br/>(2,17), (3,22)
 
-    
+        
 
     Note over PQ: Queue State<br/>[(2,9), (5,14), (3,22)]
+```
 Priority Queue Efficiency:
 1.	Binary Heap Implementation
 

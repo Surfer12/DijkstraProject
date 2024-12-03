@@ -1,7 +1,8 @@
-package legacyalgo;
+
 import legacyalgo.DijkstraGeneric;
 import legacyalgo.DijkstraAlgo;
 import legacyalgo.generic.graphs.WeightedGraph;
+
 public class Main {
     public static void main(String[] args) {
         WeightedGraph graph = new WeightedGraph();
