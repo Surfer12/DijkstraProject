@@ -1,0 +1,15 @@
+graph TD
+    subgraph Initial Graph
+        1((1)) --> |4| 2((2))
+        1 --> |2| 3((3))
+        2 --> |5| 4((4))
+        2 --> |1| 5((5))
+        3 --> |3| 6((6))
+
+        style 1 fill:#f9f,stroke:#333,stroke-width:4px
+        style 2 fill:#bbf,stroke:#333,stroke-width:2px
+        style 3 fill:#bbf,stroke:#333,stroke-width:2px
+        style 4 fill:#ddf,stroke:#333,stroke-width:2px
+        style 5 fill:#ddf,stroke:#333,stroke-width:2px
+        style 6 fill:#ddf,stroke:#333,stroke-width:2px
+    end

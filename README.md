@@ -1,29 +1,18 @@
-# Dijkstra Algorithm Project
+## Getting Started
 
-This project implements Dijkstra's algorithm to find the shortest path in a weighted graph. It consists of three main
-classes:
+Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
 
-## Files
+## Folder Structure
 
-- **src/Main.java**: Contains the `Main` class with the `main` method. It initializes a `WeightedGraph` instance, adds
-  edges to the graph, and calls the Dijkstra algorithm to find the shortest path from a starting vertex.
+The workspace contains two folders by default, where:
 
-- **src/DijkstraGeneric.java**: Implements Dijkstra's algorithm. It includes methods to calculate the shortest path from
-  a starting vertex and to print the path and total distance.
+- `src`: the folder to maintain sources
+- `lib`: the folder to maintain dependencies
 
-- **src/WeightedGraph.java**: Represents a weighted graph. It includes methods to add edges, retrieve the number of
-  vertices, and get the adjacency list. It also defines a nested `Node` class to represent graph nodes.
+Meanwhile, the compiled output files will be generated in the `bin` folder by default.
 
-## How to Run
+> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
 
-1. Ensure you have Java installed on your machine.
-2. Compile the Java files:
-   ```
-   javac src/*.java
-   ```
-3. Run the `Main` class:
-   ```
-   java src.Main
-   ```
+## Dependency Management
 
-This will execute the program and display the shortest path from the starting vertex to the specified destination.
+The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).

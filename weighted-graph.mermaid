@@ -1,0 +1,15 @@
+graph TD
+    0((0)) -->|7| 1((1))
+    0 -->|9| 2((2))
+    0 -->|14| 5((5))
+    1 -->|10| 2((2))
+    1 -->|15| 3((3))
+    2 -->|11| 3((3))
+    2 -->|2| 5((5))
+    3 -->|6| 4((4))
+    4 -->|9| 5((5))
+
+    style 0 fill:#f9f,stroke:#333,stroke-width:4px
+    style 1,2,3,4,5 fill:#bbf,stroke:#333,stroke-width:2px
+
+    classDef highlight stroke-width:3px,stroke:#f66

@@ -1,0 +1,18 @@
+sequenceDiagram
+    participant Start as Node 0
+    participant Path as Shortest Path Found
+    participant Dist as Distance Array
+    
+    Note over Start: Initial distances:<br/>0: 0<br/>1: ∞<br/>2: ∞<br/>3: ∞<br/>4: ∞<br/>5: ∞
+    
+    Start->>Dist: Update neighbors of 0
+    Note over Dist: 0: 0<br/>1: 7<br/>2: 9<br/>3: ∞<br/>4: ∞<br/>5: 14
+    
+    Start->>Path: Visit node 1 (min distance: 7)
+    Note over Dist: Update via node 1:<br/>2: min(9, 7+10)=9<br/>3: min(∞, 7+15)=22
+    
+    Start->>Path: Visit node 2 (min distance: 9)
+    Note over Dist: Update via node 2:<br/>3: min(22, 9+11)=20<br/>5: min(14, 9+2)=11
+    
+    Start->>Path: Visit node 5 (min distance: 11)
+    Note over Path: Final shortest path to 5:<br/>0 → 2 → 5<br/>Total distance: 11
