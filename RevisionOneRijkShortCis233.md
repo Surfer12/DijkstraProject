@@ -1,32 +1,10 @@
-# Dijkstra's Algorithm with Case Study
-
-## 1. Practical Example
-Consider the following weighted graph:
+Dijkstra’s Algorithm with Case Study: Consider the following weighted graph:
 ![alt text](<Dijkstra Algorithm Image.jpg>)
-```mermaid
-graph TD
-    0((0)) -->|4| 1((1))
-    0 -->|7| 6((6))
-    1 -->|9| 2((2))
-    1 -->|11| 6((6))
-    1 -->|20| 7((7))
-    2 -->|6| 3((3))
-    2 -->|2| 4((4))
-    3 -->|5| 5((5))
-    3 -->|10| 4((4))
-    4 -->|15| 8((5))
-    4 -->|1| 7((7))
-    5 -->|12| 8((8))
-    6 -->|1| 7((7))
-    7 -->|3| 8((8))
 
-    style 0 1 2 3 4 5 6 7 8 fill:#bbf,stroke:#333,stroke-width:2px
-```
-
-### Sample Path Analysis: 0 to last node number five.
+Sample Path Analysis: 0 to Node Five
 ```mermaid
 sequenceDiagram
-    participa nt PQ as Priority Queue
+    participant PQ as Priority Queue
     participant D as Distance Array
     participant P as Path Tracking
 
@@ -98,17 +76,32 @@ graph TD
         DT8[8: **11**]
     end
 ```
+    Algorithm Processing Steps
 
+sequenceDiagram
+    participant PQ as Priority Queue
+    participant D as Distance Array
+    participant P as Path Tracker
 
-```mermaid
+    Note over PQ,P: Algorithm Initialization
+    PQ->>D: Set initial distances (∞)
+    D->>D: Set source distance (0)
+
+    loop While Priority Queue Not Empty
+        PQ->>D: Get node with min distance
+        D->>P: Update shortest paths
+        P->>PQ: Add unvisited neighbors
+    end
+
 graph TD
     subgraph Final Shortest Paths
-        P5[0 → 6 → 7 → 8 → 4 → 2 → 3 → 5: 22 units]
+        P5[0 → 6 → 7 → 4 → 2 → 3 → 5: 22 units]
     end
 ```
 
-### Alternative Paths Analysis for first four nodes
+Alternative Paths Analysis for First Four Nodes
 ```mermaid
+
 graph TD
     subgraph Alternative Routes
         P1[Path 1: 0→1→2→4→8<br/>Cost: 20]
@@ -117,9 +110,7 @@ graph TD
     end
 ```
 
-
-
-## 2. Algorithm Implementation for Example
+2. Algorithm Implementation for Example
 
 ```java
 import java.util.*;
@@ -195,6 +186,22 @@ public class DijkstraExample {
         return distances;
     }
 
+    // Method to reconstruct the shortest path
+    public static List<Integer> getPath(Map<Integer, Integer> previousNodes, int start, int end) {
+        List<Integer> path = new ArrayList<>();
+        Integer current = end;
+        while (current != null && current != start) {
+            path.add(current);
+            current = previousNodes.get(current);
+        }
+        if (current == null) {
+            return Collections.emptyList(); // No path found
+        }
+        path.add(start);
+        Collections.reverse(path);
+        return path;
+    }
+
     public static void main(String[] args) {
         WeightedGraph graph = new WeightedGraph();
         // Adding edges as per the example graph
@@ -214,11 +221,51 @@ public class DijkstraExample {
         graph.addEdge(6, 7, 1);
         graph.addEdge(7, 8, 3);
 
-        Map<Integer, Integer> distances = findShortestPath(graph, 0);
-        System.out.println("Shortest distances from node 0:");
+        int startNode = 0;
+        int endNode = 5;
+        Map<Integer, Integer> distances = findShortestPath(graph, startNode);
+        List<Integer> shortestPath = getPath(getPreviousNodes(graph, startNode), startNode, endNode);
+
+        System.out.println("Shortest distances from node " + startNode + ":");
         for(Map.Entry<Integer, Integer> entry : distances.entrySet()){
             System.out.println("Node " + entry.getKey() + ": " + entry.getValue());
         }
+
+        System.out.println("\nShortest path from node " + startNode + " to node " + endNode + ": " + shortestPath + " with total distance: " + distances.get(endNode));
+    }
+
+    // Helper method to retrieve previousNodes map
+    public static Map<Integer, Integer> getPreviousNodes(WeightedGraph graph, int start) {
+        Map<Integer, Integer> distances = new HashMap<>();
+        Map<Integer, Integer> previousNodes = new HashMap<>();
+        PriorityQueue<Node> pq = new PriorityQueue<>();
+
+        // Initialize distances
+        for (int node = 0; node < 9; node++) {
+            distances.put(node, Integer.MAX_VALUE);
+        }
+        distances.put(start, 0);
+        pq.offer(new Node(start, 0));
+
+        while (!pq.isEmpty()) {
+            Node current = pq.poll();
+            int currentNode = current.id;
+            int currentDist = current.distance;
+
+            // Skip if we've already found a better path
+            if (currentDist > distances.get(currentNode)) continue;
+
+            for (Edge edge : graph.getEdges(currentNode)) {
+                int neighbor = edge.dest;
+                int newDist = distances.get(currentNode) + edge.weight;
+                if (newDist < distances.get(neighbor)) {
+                    distances.put(neighbor, newDist);
+                    previousNodes.put(neighbor, currentNode);
+                    pq.offer(new Node(neighbor, newDist));
+                }
+            }
+        }
+        return previousNodes;
     }
 }
 ```

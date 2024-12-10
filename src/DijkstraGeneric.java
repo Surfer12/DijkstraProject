@@ -6,12 +6,16 @@ public class DijkstraGeneric {
 • Use Dijkstra's algorithm to find the shortest path and its total distance
 from Node 0 to Node 5 in the graph shown below. You are required to
 submit a pdf document. */
- 
+
 package legacyalgo;
 
-import generic.GenericNode;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
 
-import java.util.*;
+import generic.GenericNode;
 
 public class DijkstraGeneric {
     public static <T> Map<GenericNode<T>, Integer> dijkstra(
